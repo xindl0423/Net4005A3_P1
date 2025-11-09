@@ -26,13 +26,13 @@ with socket.socket(socket.AF_INET,socket.SOCK_STREAM) as s:
     with conn:
         print('Connected with',addr)
 
-        encoded_message = conn.recv(1024)
-        encoded_signature = conn.recv(1024)
+        encoded_message = conn.recv(256)
+        encoded_signature = conn.recv(256)
 
         message = private_key.decrypt(encoded_message,padding.OAEP(mgf=padding.MGF1(algorithm=hashes.SHA256()),algorithm=hashes.SHA256(),label=None))
 
-        with open("client_public.pem","wb") as f:
-            client_public = serialization.load_pem_private_key(f.read(),password=None)
+    with open("client_public.pem","rb") as f:
+            client_public = serialization.load_pem_public_key(f.read())
 
     try:
         client_public.verify(

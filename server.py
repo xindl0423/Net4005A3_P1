@@ -4,7 +4,7 @@ from cryptography.hazmat.primitives.asymmetric import rsa, padding
 from cryptography.hazmat.primitives import serialization, hashes
 
 host = 'localhost'
-PORT = 1000
+port = 1000
 
 if not os.path.exists('server_private.pem'):
     private_key = rsa.generate_private_key(public_exponent=65537,key_size=2048)
